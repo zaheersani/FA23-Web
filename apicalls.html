@@ -55,7 +55,24 @@
                         // console.log(element.title)
                         $('#mylist').append(`<li class="list-group-item" id="${element.id}">${element.name}</li>`);
                     });
+                    // Adding click event after rendering the elements
+                    $('.list-group-item').on('click', function(e) {
+                        // clear todos
+                        $('#todoslist').html('');
+                        
+                        // Get user id
+                        var userid = e.target.id;
 
+                        // Filter and Append DOM
+                        todos
+                        .filter(u => u.userId == userid)
+                        .forEach(element => {
+                            $('#todoslist').append(`<li class="list-group-item" id="${element.id}">${element.title}</li>`);
+                        });
+
+                        // Display TODOs
+                        $('#todos').css('display','block')
+                    })
                 })
                 
                 console.log('Users are ready!')
